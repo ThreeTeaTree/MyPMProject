@@ -8,28 +8,56 @@ import logic.GameLogic.STATE;
 import sharedObject.RenderableHolder;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import drawing.Game;
 import drawing.Instruction;
 import drawing.Menu ;
 import input.AudioUtility;
 
 
 public class Main extends Application {
+	
+	private GameLogic gameLogic ;
+	
+	//Menu
+	private StackPane menuPane ;
+	private Scene menuScene ;
+	private Menu menu ;
+	
+	//help
+	private StackPane helpPane ;
+	private Scene helpScene ;
+	private Instruction instruction ;
+	
+	//Game
+	private Pane gamePane ;
+	private Scene gameScene ;
+	private Game game ;
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			GameLogic gameLogic = new GameLogic() ;
 			
-			StackPane menu = new StackPane();
-			Scene menuScene = new Scene(menu,1280,720);
-			Menu menu1 = new Menu(1280,720,gameLogic) ;
-			menu.getChildren().add(menu1);
+			gameLogic = new GameLogic() ;
 			
-			StackPane help = new StackPane();
-			Scene helpScene = new Scene(help, 1280,720);
-			Instruction instruction = new Instruction(1280, 720, gameLogic) ;
-			help.getChildren().add(instruction);
+			menuPane = new StackPane();
+			menuScene = new Scene(menuPane,1280,720);
+			menu = new Menu(1280,720,gameLogic) ;
+			menuPane.getChildren().add(menu);
+			
+			helpPane = new StackPane();
+			helpScene = new Scene(helpPane, 1280,720);
+			instruction = new Instruction(1280, 720, gameLogic) ;
+			helpPane.getChildren().add(instruction);
+			
+
+			gamePane = new Pane();
+			gameScene = new Scene(gamePane,1280,720);
+			game = new Game(1280,720,gameLogic) ;
+			gamePane.getChildren().add(game) ;
 			
 			primaryStage.setScene(menuScene);
 			primaryStage.setTitle("Overworld Guardian");
@@ -46,13 +74,17 @@ public class Main extends Application {
 				public void handle(long now) {
 					if (gameLogic.getGameState() == STATE.Menu) {
 						primaryStage.setScene(menuScene);
-						menu1.tick();
-						menu1.paintComponent();
+						menu.tick();
+						menu.paintComponent();
 					}
 					if (gameLogic.getGameState() == STATE.Help) {
 						primaryStage.setScene(helpScene);
 						instruction.tick();
 						instruction.paintComponent();
+					}
+					if (gameLogic.getGameState() == STATE.Game) {
+						primaryStage.setScene(gameScene);
+						game.tick(now);
 					}
 				}
 			};animation.start();

@@ -1,11 +1,13 @@
 package sharedObject;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
-public interface IRenderable {
-	public void tick();
-	public void draw(GraphicsContext gc);
-	public int getZ();
-	public boolean isDestroyed();
-	public boolean isVisible();
+public interface IRenderable extends Tickable, Comparable<IRenderable> {
+	
+	double getRenderPriority();
+	
+	int compareTo(IRenderable other);
+	
+	
 }

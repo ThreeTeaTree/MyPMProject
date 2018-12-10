@@ -49,29 +49,29 @@ public class Instruction extends Canvas{
 		gc.fillText("Back", , arg2);*/
 	}
 	
-	public boolean onBackButton() {
+	private boolean onBackButton() {
 		return (InputUtility.mouseX > 1150 && InputUtility.mouseX < 1250)&&(InputUtility.mouseY >= 650 && InputUtility.mouseY <= 680);
 	}
 	
 	//add later
-	public boolean onPrevButton() {
+	private boolean onPrevButton() {
 		return true ;
 	}
 	
 	//add later
-	public boolean onNextButton() {
+	private boolean onNextButton() {
 		return true ;
 	}
 	
 	
 	//add later
-	public boolean onPlayButton() {
+	private boolean onPlayButton() {
 		return true ;
 	}
 	
 	
 	
-	public void addListerner() {
+	private void addListerner() {
 		this.setOnMousePressed((MouseEvent event) -> {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				System.out.println("Click");

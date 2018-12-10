@@ -2,11 +2,8 @@ package input;
 
 public class InputUtility {
 	public static double mouseX,mouseY;
-	public static boolean mouseOnGameScreen;
-	public static boolean mouseOnBar;
 	public static boolean mouseOnMenu;
 	public static boolean mouseOnHelp;
-	public static boolean mouseOnInfoWindow;
 	private static boolean isLeftDown = false;
 	private static boolean isLeftClickedLastTick = false;
 	private static boolean isLeftRelease = false;

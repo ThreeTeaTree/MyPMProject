@@ -18,17 +18,19 @@ public class Menu extends Canvas{
 	
 	private GameLogic gameLogic;
 	
-	public Menu(double width , double height,GameLogic gameLogic) {
+	public Menu(double width , double height, GameLogic gameLogic) {
 		super(width,height);
 		this.gameLogic = gameLogic;
 		addListerner();
 	}
 	
 	public void tick() {
-		if (InputUtility.isLeftClickRelease() && OnHelpButton()) {
+		if (InputUtility.isLeftClickRelease() && onHelpButton()) {
 			gameLogic.setGameState(STATE.Help);
 		}
-		
+		if(InputUtility.isLeftClickRelease() && onPlayButton()) {
+			gameLogic.setGameState(STATE.Game);
+		}
 		InputUtility.updateInputState();
 	}
 	
@@ -47,7 +49,7 @@ public class Menu extends Canvas{
 		
 		gc.setFont(RenderableHolder.btnFont);
 		
-		if (OnPlayButton()) {
+		if (onPlayButton()) {
 			gc.setFill(Color.ORANGE);
 			gc.fillText(">Play", 590, 500);
 		} else {
@@ -55,7 +57,7 @@ public class Menu extends Canvas{
 			gc.fillText("Play", 600, 500);
 		}
 		
-		if (OnHelpButton()) {
+		if (onHelpButton()) {
 			gc.setFill(Color.ORANGE);
 			gc.fillText(">Help", 595, 575);
 		} else {
@@ -74,11 +76,11 @@ public class Menu extends Canvas{
 		
 	}
 	
-	public boolean OnPlayButton() {
+	public boolean onPlayButton() {
 		return (InputUtility.mouseX > 600 && InputUtility.mouseX < 672.5)&&(InputUtility.mouseY >= 472 && InputUtility.mouseY <= 525);
 	}
 	
-	public boolean OnHelpButton() {
+	public boolean onHelpButton() {
 		return (InputUtility.mouseX > 540 && InputUtility.mouseX < 748)&&(InputUtility.mouseY >= 555 && InputUtility.mouseY <= 575);
 	}
 	
